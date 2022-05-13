@@ -81,7 +81,7 @@ const Container = styled.div`
   main {
     height: auto;
     width: 100%;
-    padding: 0 40px;
+    padding: 0 10px;
   }
 
   h3 {
@@ -115,7 +115,7 @@ const Categoria = styled.div`
   justify-content: center;
   align-items: center;
   font-family: "Lexend Zetta", sans-serif;
-  font-size: 11px;
+  font-size: 8px;
   font-weight: 400;
   background-color: var(--purple);
   color: var(--white);

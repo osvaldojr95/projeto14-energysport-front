@@ -99,7 +99,7 @@ const Container = styled.button`
   z-index: 5;
 
   .cart {
-    font-size: 25px;
+    font-size: 20px;
     color: var(--white);
   }
 `;
@@ -123,13 +123,13 @@ const Account = styled.div`
   align-items: center;
 
   h2 {
-    font-size: 16px;
+    font-size: 12px;
     color: var(--white);
   }
 
   .logout {
     margin-left: 10px;
-    font-size: 25px;
+    font-size: 20px;
     color: var(--white);
   }
 `;
