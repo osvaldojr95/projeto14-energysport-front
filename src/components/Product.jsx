@@ -161,7 +161,7 @@ const Details = styled.main`
 const Lista = styled.div`
   height: 90px;
   width: 100%;
-  padding: 0 40px;
+  padding: 0 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

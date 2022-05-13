@@ -14,7 +14,7 @@ export default function Header() {
     if (userInfo.name) {
       return (
         <>
-          <h2>Olá, {userInfo.name}</h2>
+          <h2>{userInfo.name}</h2>
           <MdLogout
             className="logout"
             onClick={() => {
