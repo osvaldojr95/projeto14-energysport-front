@@ -19,10 +19,10 @@ export default function App() {
           <DataProvider>
             <BrowserRouter>
               <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<SignUp />} />
-                {/* <Route path="/produto" element={<Product />} /> */}
+                <Route path="/produto" element={<Product />} />
               </Routes>
             </BrowserRouter>
           </DataProvider>

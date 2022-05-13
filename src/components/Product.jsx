@@ -71,7 +71,7 @@ export default function Product() {
           ).toFixed(2)}{" "}
           sem juros
         </h5>
-        <Button>Adicionar ao Carrinho</Button>
+        <Button callback={() => {}} margin="20px 0 0 0">Adicionar ao Carrinho</Button>
       </Details>
       <Lista>{produtos}</Lista>
     </Container>
