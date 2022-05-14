@@ -30,9 +30,9 @@ export default function Home() {
 
   useEffect(() => {
     const getProdutos = async () => {
-      // const URL = "https://projeto13-backend.herokuapp.com/sign-in";
+      // const URL = "/products" + (categoria === "Todos" ? "" : `?type=${categoria}`);
       try {
-        // const response = await axios.post(URL, obj, config);
+        // const response = await axios.get(URL, {}, {}});
         // const { data } = response;
         let list = [...data];
         if (categoria !== "Todos") {

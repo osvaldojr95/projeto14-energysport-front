@@ -24,12 +24,10 @@ export default function Product() {
 
   useEffect(() => {
     const getProdutos = async () => {
-      // const URL = "https://projeto13-backend.herokuapp.com/sign-in";
+      // const URL = "/products?type=${produto.type}&limit=8`);
       try {
-        // const response = await axios.post(URL, obj, config);
-        // setError("");
+        // const response = await axios.get(URL, {}, {});
         // const { data } = response;
-
         const lista = data.map((item) => {
           return <ItemList key={item._id} {...item} />;
         });
@@ -71,7 +69,9 @@ export default function Product() {
           ).toFixed(2)}{" "}
           sem juros
         </h5>
-        <Button callback={() => {}} margin="20px 0 0 0">Adicionar ao Carrinho</Button>
+        <Button callback={() => {}} margin="20px 0 0 0">
+          Adicionar ao Carrinho
+        </Button>
       </Details>
       <Lista>{produtos}</Lista>
     </Container>

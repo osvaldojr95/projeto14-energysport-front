@@ -73,7 +73,7 @@ const Container = styled.div`
   }
 
   .bold {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 800;
   }
 `;

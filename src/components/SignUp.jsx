@@ -47,9 +47,8 @@ export default function SignUp() {
 
   const signup = async (e) => {
     e.preventDefault();
-
-    // const URL = "https://projeto13-backend.herokuapp.com/sign-in";
-    // const obj = { password };
+    // const URL = "/signup";
+    // const obj = { name, password };
     // const config = {
     //   headers: { User: email },
     // };
@@ -58,9 +57,9 @@ export default function SignUp() {
     //   setError("");
     //   const { data } = response;
     //   const { name, token } = data;
-    //   setUserInfo({ name, token });
+    setUserInfo({ name: "Osvaldo", token: "TOKEN" });
     //   localStorage.setItem("userInfo", JSON.stringify({ name, token }));
-    //   navigate("/");
+    navigate("/login");
     // } catch (err) {
     //   setError(err);
     // }

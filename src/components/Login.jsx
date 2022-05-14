@@ -45,8 +45,7 @@ export default function Login() {
 
   const login = async (e) => {
     e.preventDefault();
-
-    // const URL = "https://projeto13-backend.herokuapp.com/sign-in";
+    // const URL = "/signin";
     // const obj = { password };
     // const config = {
     //   headers: { User: email },

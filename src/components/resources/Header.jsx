@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -37,12 +37,12 @@ export default function Header() {
   };
 
   const logout = async () => {
-    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-    const URL = "https://projeto13-backend.herokuapp.com/sign-out";
+    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    // const URL = "/signout";
     try {
-      await axios.post(URL, {}, config);
-      localStorage.removeItem("userInfo");
-      setUserInfo({});
+      // await axios.delete(URL, {}, config);
+      // localStorage.removeItem("userInfo");
+      // setUserInfo({});
     } catch (e) {}
   };
 

@@ -92,6 +92,7 @@ export default function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
+
 export function useData() {
   const context = useContext(DataContext);
   const { data, setData } = context;
