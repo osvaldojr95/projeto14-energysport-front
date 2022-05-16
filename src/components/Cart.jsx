@@ -9,7 +9,7 @@ import { useData } from "../contexts/DataContext.jsx";
 import Header from "./resources/Header.jsx";
 import Button from "./resources/Button.jsx";
 
-export default function Home() {
+export default function Cart() {
   const [refresh, setRefresh] = useState([]);
   const { userInfo } = useUser();
   const { data, cart, setCart } = useData();

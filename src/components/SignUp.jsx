@@ -38,6 +38,10 @@ export default function SignUp() {
         text = "Erro inesperado";
         break;
 
+      case 409:
+        text = "Senhas Diferentes";
+        break;
+
       default:
         text = "Erro inesperado";
         break;
@@ -47,22 +51,24 @@ export default function SignUp() {
 
   const signup = async (e) => {
     e.preventDefault();
-    // const URL = "/signup";
-    // const obj = { name, password };
-    // const config = {
-    //   headers: { User: email },
-    // };
-    // try {
-    //   const response = await axios.post(URL, obj, config);
-    //   setError("");
-    //   const { data } = response;
-    //   const { name, token } = data;
-    setUserInfo({ name: "Osvaldo", token: "TOKEN" });
-    //   localStorage.setItem("userInfo", JSON.stringify({ name, token }));
-    navigate("/login");
-    // } catch (err) {
-    //   setError(err);
-    // }
+    if (confirm === password) {
+      const URL = "https://back-energysport.herokuapp.com/signup";
+      const obj = { name, password };
+      const config = {
+        headers: { User: email },
+      };
+      try {
+        await axios.post(URL, obj, config);
+        setError("");
+        navigate("/login");
+      } catch (err) {
+        setError(err);
+      }
+    } else {
+      let err = new Error("Senhas Diferentes!");
+      err.response.status = 409;
+      setError(err);
+    }
   };
 
   useEffect(() => {
@@ -71,8 +77,7 @@ export default function SignUp() {
       if (infoSerializado) {
         const user = JSON.parse(infoSerializado);
         setUserInfo(user);
-        console.log(user);
-        //navigate("/home");
+        navigate("/home");
       } else {
         console.log("remove?");
         localStorage.removeItem("userInfo");
