@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { BsTagFill } from "react-icons/bs";
 import { FaLock } from "react-icons/fa";
 import { useUser } from "../contexts/UserContext";
-import { useData } from "../contexts/DataContext";
 import Header from "./resources/Header.jsx";
 import Banner from "./resources/Banner.jsx";
 import Button from "./resources/Button.jsx";
@@ -14,7 +13,6 @@ import ItemList from "./resources/ItemList";
 export default function Product() {
   const [produtos, setProdutos] = useState([]);
   const { produto, userInfo } = useUser();
-  const { data } = useData();
   const navigate = useNavigate();
 
   const addCart = () => {
@@ -39,10 +37,10 @@ export default function Product() {
 
   useEffect(() => {
     const getProdutos = async () => {
-      // const URL = "/products?type=${produto.type}&limit=8`);
+      const URL = `https://back-energysport.herokuapp.com/products?type=${produto.type}&limit=8`;
       try {
-        // const response = await axios.get(URL, {}, {});
-        // const { data } = response;
+        const response = await axios.get(URL, {}, {});
+        const { data } = response;
         const lista = data.map((item) => {
           return <ItemList key={item._id} {...item} />;
         });

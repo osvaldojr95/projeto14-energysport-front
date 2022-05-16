@@ -12,7 +12,7 @@ import Button from "./resources/Button.jsx";
 export default function Cart() {
   const [refresh, setRefresh] = useState([]);
   const { userInfo } = useUser();
-  const { data, cart, setCart } = useData();
+  const { cart, setCart } = useData();
   const navigate = useNavigate();
 
   const lista = () => {
@@ -28,14 +28,14 @@ export default function Cart() {
               <AiFillMinusCircle
                 className="botao"
                 onClick={() => {
-                  updateQtd(item._id,item.qtd - 1);
+                  updateQtd(item._id, item.qtd - 1);
                 }}
               />
               <h6>{item.parcel}</h6>
               <AiFillPlusCircle
                 className="botao"
                 onClick={() => {
-                  updateQtd(item._id,item.qtd + 1);
+                  updateQtd(item._id, item.qtd + 1);
                 }}
               />
             </div>
@@ -72,12 +72,12 @@ export default function Cart() {
 
   useEffect(() => {
     const getCarrinho = async () => {
-      // const URL = "/cart";
-      // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+      const URL = "https://back-energysport.herokuapp.com/cart";
+      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       try {
-        // const response = await axios.get(URL, {}, config});
-        // const { data } = response;
-        setCart([...data.slice(4)]);
+        const response = await axios.get(URL, {}, config);
+        const { data } = response;
+        setCart([...data]);
       } catch (e) {}
     };
     getCarrinho();

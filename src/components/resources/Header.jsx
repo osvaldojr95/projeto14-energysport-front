@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import Logo from "./Logo.jsx";
 import { useNavigate } from "react-router-dom";
 import { BsCart3 } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
@@ -15,12 +16,7 @@ export default function Header() {
       return (
         <>
           <h2>{userInfo.name}</h2>
-          <MdLogout
-            className="logout"
-            onClick={() => {
-              setUserInfo({});
-            }}
-          />
+          <MdLogout className="logout" onClick={logout} />
         </>
       );
     }
@@ -37,13 +33,16 @@ export default function Header() {
   };
 
   const logout = async () => {
-    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-    // const URL = "/signout";
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    const URL = "https://back-energysport.herokuapp.com/logout";
     try {
-      // await axios.delete(URL, {}, config);
-      // localStorage.removeItem("userInfo");
-      // setUserInfo({});
-    } catch (e) {}
+      await axios.delete(URL, {}, config);
+      localStorage.removeItem("userInfo");
+      setUserInfo({});
+    } catch (e) {
+      localStorage.removeItem("userInfo");
+      setUserInfo({});
+    }
   };
 
   useEffect(() => {
@@ -72,12 +71,10 @@ export default function Header() {
         }}
       />
       <Logo
-        onClick={() => {
+        callback={() => {
           navigate("/");
         }}
-      >
-        LOGO
-      </Logo>
+      />
       <Account>{account()}</Account>
     </Container>
   );
@@ -106,16 +103,6 @@ const Container = styled.button`
     font-size: 20px;
     color: var(--white);
   }
-`;
-
-const Logo = styled.h1`
-  font-family: "Lexend Zetta", sans-serif;
-  font-size: 30px;
-  color: var(--white);
-  position: absolute;
-  top: auto;
-  left: 50%;
-  transform: translate(-50%, 0);
 `;
 
 const Account = styled.div`

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useUser } from "../contexts/UserContext";
 import Input from "./resources/Input.jsx";
 import Button from "./resources/Button.jsx";
+import Logo from "./resources/Logo.jsx";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,26 +46,26 @@ export default function Login() {
 
   const login = async (e) => {
     e.preventDefault();
-    // const URL = "/signin";
-    // const obj = { password };
-    // const config = {
-    //   headers: { User: email },
-    // };
-    // try {
-    //   const response = await axios.post(URL, obj, config);
-    //   setError("");
-    //   const { data } = response;
-    //   const { name, token } = data;
-    setUserInfo({ name: "Osvaldo", token: "TOKEN" });
-    //   localStorage.setItem("userInfo", JSON.stringify({ name, token }));
-    if (produto) {
-      navigate("/produto");
-    } else {
-      navigate("/");
+    const URL = "https://back-energysport.herokuapp.com/login";
+    const obj = { password };
+    const config = {
+      headers: { User: email },
+    };
+    try {
+      const response = await axios.post(URL, obj, config);
+      setError("");
+      const { data } = response;
+      const { name, token } = data;
+      setUserInfo({ name, token });
+      localStorage.setItem("userInfo", JSON.stringify({ name, token }));
+      if (produto) {
+        navigate("/produto");
+      } else {
+        navigate("/");
+      }
+    } catch (err) {
+      setError(err);
     }
-    // } catch (err) {
-    //   setError(err);
-    // }
   };
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function Login() {
         const user = JSON.parse(infoSerializado);
         setUserInfo(user);
         console.log(user);
-        //navigate("/home");
+        navigate("/home");
       } else {
         console.log("remove?");
         localStorage.removeItem("userInfo");
@@ -85,7 +86,7 @@ export default function Login() {
 
   return (
     <Container>
-      <Logo>LOGO</Logo>
+      <Logo type="true"/>
       <form>
         <Input
           type="email"
@@ -130,13 +131,6 @@ const Container = styled.div`
   form {
     width: 100%;
   }
-`;
-
-const Logo = styled.h1`
-  font-family: "Lexend Zetta", sans-serif;
-  font-size: 60px;
-  color: var(--purple);
-  margin-bottom: auto;
 `;
 
 const Aviso = styled.h5`

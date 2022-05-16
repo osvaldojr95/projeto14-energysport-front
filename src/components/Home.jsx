@@ -12,7 +12,6 @@ export default function Home() {
   const [produtos, setProdutos] = useState([]);
   const [refresh, setRefresh] = useState([]);
   const { setProduto } = useUser();
-  const { data } = useData();
 
   const categorias = () => {
     return (
@@ -35,10 +34,10 @@ export default function Home() {
 
   useEffect(() => {
     const getProdutos = async () => {
-      // const URL = "/products" + (categoria === "Todos" ? "" : `?type=${categoria}`);
+      const URL = "https://back-energysport.herokuapp.com/products" + (categoria === "Todos" ? "" : `?type=${categoria}`);
       try {
-        // const response = await axios.get(URL, {}, {}});
-        // const { data } = response;
+        const response = await axios.get(URL, {}, {});
+        const { data } = response;
         let list = [...data];
         if (categoria !== "Todos") {
           list = list.filter((item) => {

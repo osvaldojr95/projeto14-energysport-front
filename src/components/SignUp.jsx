@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useUser } from "../contexts/UserContext";
 import Input from "./resources/Input.jsx";
 import Button from "./resources/Button.jsx";
+import Logo from "./resources/Logo.jsx";
 
 export default function SignUp() {
   const [name, setName] = useState("");
@@ -88,7 +89,7 @@ export default function SignUp() {
 
   return (
     <Container>
-      <Logo>LOGO</Logo>
+      <Logo type="true" />
       <form>
         <Input
           type="input"
@@ -145,13 +146,6 @@ const Container = styled.div`
   form {
     width: 100%;
   }
-`;
-
-const Logo = styled.h1`
-  font-family: "Lexend Zetta", sans-serif;
-  font-size: 60px;
-  color: var(--purple);
-  margin-bottom: auto;
 `;
 
 const Aviso = styled.h5`
