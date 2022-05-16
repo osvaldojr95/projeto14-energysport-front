@@ -11,6 +11,7 @@ export default function Home() {
   const [categoria, setCategoria] = useState("Todos");
   const [produtos, setProdutos] = useState([]);
   const [refresh, setRefresh] = useState([]);
+  const { setProduto } = useUser();
   const { data } = useData();
 
   const categorias = () => {
@@ -27,6 +28,10 @@ export default function Home() {
       </Categorias>
     );
   };
+
+  useEffect(() => {
+    setProduto({});
+  }, []);
 
   useEffect(() => {
     const getProdutos = async () => {
@@ -48,7 +53,6 @@ export default function Home() {
         });
         setProdutos(<Lista>{list}</Lista>);
         setRefresh([]);
-        console.log(produtos);
       } catch (e) {}
     };
     getProdutos();

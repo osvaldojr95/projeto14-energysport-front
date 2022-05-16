@@ -8,6 +8,8 @@ import Home from "./Home.jsx";
 import Login from "./Login.jsx";
 import SignUp from "./SignUp.jsx";
 import Product from "./Product.jsx";
+import Cart from "./Cart.jsx";
+import Checkout from "./Checkout.jsx"
 
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/cadastro" element={<SignUp />} />
                 <Route path="/produto" element={<Product />} />
+                <Route path="/carrinho" element={<Cart />} />
+                <Route path="/confirmacao" element={<Checkout />} />
               </Routes>
             </BrowserRouter>
           </DataProvider>

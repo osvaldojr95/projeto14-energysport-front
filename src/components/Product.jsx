@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { BsTagFill } from "react-icons/bs";
+import { FaLock } from "react-icons/fa";
 import { useUser } from "../contexts/UserContext";
 import { useData } from "../contexts/DataContext";
 import Header from "./resources/Header.jsx";
@@ -15,6 +16,20 @@ export default function Product() {
   const { produto, userInfo } = useUser();
   const { data } = useData();
   const navigate = useNavigate();
+
+  const addCart = () => {
+    if (!userInfo.name) {
+      navigate("/login");
+    } else {
+      // const URL = "/cart";
+      // const obj = { id: produto._id };
+      // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+      try {
+        // const response = await axios.post(URL, obj, config});
+        navigate("/carrinho");
+      } catch (e) {}
+    }
+  };
 
   useEffect(() => {
     if (!produto.name) {
@@ -69,9 +84,17 @@ export default function Product() {
           ).toFixed(2)}{" "}
           sem juros
         </h5>
-        <Button callback={() => {}} margin="20px 0 0 0">
+        <Button callback={addCart} margin="20px 0 0 0">
           Adicionar ao Carrinho
         </Button>
+        {userInfo.name ? (
+          <></>
+        ) : (
+          <Lock>
+            <FaLock />
+            <h6>Necessário efetuar login</h6>
+          </Lock>
+        )}
       </Details>
       <Lista>{produtos}</Lista>
     </Container>
@@ -169,5 +192,17 @@ const Lista = styled.div`
   flex-wrap: wrap;
   flex-grow: 0;
   flex-shrink: 0;
+  font-family: "Lexend Deca", sans-serif;
+`;
+
+const Lock = styled.div`
+  height: auto;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
   font-family: "Lexend Deca", sans-serif;
 `;

@@ -64,7 +64,11 @@ export default function Header() {
       <BsCart3
         className="cart"
         onClick={() => {
-          navigate("/carrinho");
+          if (!userInfo.name) {
+            navigate("/login");
+          } else {
+            navigate("/carrinho");
+          }
         }}
       />
       <Logo
@@ -83,7 +87,7 @@ const Container = styled.button`
   height: 50px;
   width: 100%;
   padding: 0 15px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   border: none;

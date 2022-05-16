@@ -11,7 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setUserInfo } = useUser();
+  const { produto, setUserInfo } = useUser();
 
   const showError = () => {
     if (!error) {
@@ -57,7 +57,11 @@ export default function Login() {
     //   const { name, token } = data;
     setUserInfo({ name: "Osvaldo", token: "TOKEN" });
     //   localStorage.setItem("userInfo", JSON.stringify({ name, token }));
-    navigate("/");
+    if (produto) {
+      navigate("/produto");
+    } else {
+      navigate("/");
+    }
     // } catch (err) {
     //   setError(err);
     // }

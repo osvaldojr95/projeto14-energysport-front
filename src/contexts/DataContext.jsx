@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 const DataContext = createContext();
 
@@ -80,12 +80,25 @@ export default function DataProvider({ children }) {
       type: "Tênis",
     },
   ]);
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let _total = 0;
+    cart.forEach((item) => {
+      _total += item.sale ? item.sale : item.price;
+    });
+    setTotal(_total);
+  }, [cart]);
 
   return (
     <DataContext.Provider
       value={{
         data,
         setData,
+        cart,
+        setCart,
+        total
       }}
     >
       {children}
@@ -95,6 +108,6 @@ export default function DataProvider({ children }) {
 
 export function useData() {
   const context = useContext(DataContext);
-  const { data, setData } = context;
-  return { data, setData };
+  const { data, setData, cart, setCart, total } = context;
+  return { data, setData, cart, setCart, total };
 }
