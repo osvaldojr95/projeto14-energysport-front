@@ -109,7 +109,7 @@ export default function Cart() {
           Finalizar Compra
         </Button>
       </Controle>
-      {/* <footer></footer> */}
+      <footer></footer>
     </Container>
   );
 }
@@ -244,4 +244,5 @@ const Controle = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-bottom: 90px;
 `;

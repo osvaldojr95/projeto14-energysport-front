@@ -30,10 +30,11 @@ export default function Product() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!produto.name) {
       navigate("/");
     }
-  }, []);
+  }, [produto]);
 
   useEffect(() => {
     const getProdutos = async () => {
