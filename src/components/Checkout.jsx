@@ -6,7 +6,8 @@ import { useUser } from "../contexts/UserContext";
 import { useData } from "../contexts/DataContext.jsx";
 import Header from "./resources/Header.jsx";
 import Button from "./resources/Button.jsx";
-import Input from "./resources/Input";
+import Input from "./resources/Input.jsx";
+import Success from "./resources/Success.jsx";
 
 export default function Checkout() {
   const [cep, setCep] = useState("");
@@ -16,9 +17,29 @@ export default function Checkout() {
   const [bairro, setBairro] = useState("");
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
+  const [success, setSuccess] = useState(false);
   const { userInfo } = useUser();
   const { total } = useData();
   const navigate = useNavigate();
+
+  const efetuar = async () => {
+    const URL = "https://back-energysport.herokuapp.com/demand";
+    const obj = {
+      cep,
+      city: cidade,
+      state: estado,
+      district: bairro,
+      road: rua,
+      num: numero,
+      complement: complemento,
+      value: total,
+    };
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    try {
+      await axios.post(URL, obj, config);
+      setSuccess(true);
+    } catch (err) {}
+  };
 
   useEffect(() => {
     if (!userInfo.name) {
@@ -33,31 +54,31 @@ export default function Checkout() {
       <main>
         <form>
           <Item>
-            <Block width="80%">
+            <Block width="auto">
               <label name="cidade">Cidade</label>
               <Input id="cidade" value={cidade} setValue={setCidade} />
             </Block>
-            <Block width="20%">
+            <Block width="120px">
               <label name="estado">Estado</label>
               <Input id="estado" value={estado} setValue={setEstado} />
             </Block>
           </Item>
           <Item>
-            <Block width="70%">
+            <Block width="auto">
               <label name="bairro">Bairro</label>
               <Input id="bairro" value={bairro} setValue={setBairro} />
             </Block>
-            <Block width="30%">
+            <Block width="105px">
               <label name="cep">CEP</label>
               <Input id="cep" value={cep} setValue={setCep} />
             </Block>
           </Item>
           <Item>
-            <Block width="80%">
+            <Block width="auto">
               <label name="rua">Rua</label>
               <Input id="rua" value={rua} setValue={setRua} />
             </Block>
-            <Block width="20%">
+            <Block width="100px">
               <label name="numero">Número</label>
               <Input id="numero" value={numero} setValue={setNumero} />
             </Block>
@@ -86,17 +107,12 @@ export default function Checkout() {
           >
             Voltar ao Carrinho
           </Button>
-          <Button
-            size="16px"
-            callback={() => {
-              // EFETUAR COMPRA
-
-            }}
-          >
+          <Button size="16px" callback={efetuar}>
             Efetuar Pedido
           </Button>
         </div>
       </main>
+      {success ? <Success obj={{}} /> : <></>}
     </Container>
   );
 }
@@ -104,12 +120,13 @@ export default function Checkout() {
 const Container = styled.div`
   height: 100%;
   width: 100%;
+  position: relative;
+  padding: 50px 20px;
   background: var(--background);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 50px 20px;
 
   h3 {
     width: 100%;

@@ -77,7 +77,6 @@ export default function Login() {
         console.log(user);
         navigate("/home");
       } else {
-        console.log("remove?");
         localStorage.removeItem("userInfo");
       }
     };

@@ -12,7 +12,7 @@ import Button from "./resources/Button.jsx";
 export default function Cart() {
   const [refresh, setRefresh] = useState([]);
   const { userInfo } = useUser();
-  const { cart, setCart } = useData();
+  const { total, cart, setCart } = useData();
   const navigate = useNavigate();
 
   const lista = () => {
@@ -20,10 +20,15 @@ export default function Cart() {
       return (
         <Item key={index}>
           <img src={item.img} />
-          <BsFillTrashFill className="trash" onClick={deleteItem(item._id)} />
+          <BsFillTrashFill
+            className="trash"
+            onClick={() => {
+              deleteItem(item._id);
+            }}
+          />
           <h4>{item.name}</h4>
           <div className="direita">
-            <h5>R${item.sale ? item.sale : item.price}</h5>
+            <h5>R${(item.sale ? item.sale : item.price) * item.qtd}</h5>
             <div className="quantidade">
               <AiFillMinusCircle
                 className="botao"
@@ -31,7 +36,7 @@ export default function Cart() {
                   updateQtd(item._id, item.qtd - 1);
                 }}
               />
-              <h6>{item.parcel}</h6>
+              <h6>{item.qtd}</h6>
               <AiFillPlusCircle
                 className="botao"
                 onClick={() => {
@@ -45,23 +50,29 @@ export default function Cart() {
     });
   };
 
-  const updateQtd = (id, qtd) => {
-    // const URL = "/cart";
-    // const obj = { id, qtd };
-    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-    // try {
-    //   await axios.put(URL, obj, config);
-    //   setRefresh([]);
-    // } catch (err) {}
+  const updateQtd = async (id, qtd) => {
+    if (qtd < 1) {
+      return;
+    }
+    const URL = "https://back-energysport.herokuapp.com/cart";
+    const obj = { idProd: id, qtd };
+    const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+    try {
+      await axios.put(URL, obj, config);
+      setRefresh([]);
+    } catch (err) {}
   };
 
-  const deleteItem = (id) => {
-    // const obj = { id };
-    // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-    // try {
-    //   await axios.delete(URL, obj, config);
-    //   setRefresh([]);
-    // } catch (err) {}
+  const deleteItem = async (id) => {
+    const URL = "https://back-energysport.herokuapp.com/cart";
+    const config = {
+      headers: { Authorization: `Bearer ${userInfo.token}`, idProd: id },
+    };
+    try {
+      console.log(config);
+      await axios.delete(URL, config);
+      setRefresh([]);
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -75,7 +86,7 @@ export default function Cart() {
       const URL = "https://back-energysport.herokuapp.com/cart";
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       try {
-        const response = await axios.get(URL, {}, config);
+        const response = await axios.get(URL, config);
         const { data } = response;
         setCart([...data]);
       } catch (e) {}
@@ -109,7 +120,7 @@ export default function Cart() {
           Finalizar Compra
         </Button>
       </Controle>
-      <footer></footer>
+      <footer>Total: R${total}</footer>
     </Container>
   );
 }
@@ -146,7 +157,7 @@ const Container = styled.div`
   }
 
   footer {
-    height: 90px;
+    height: 60px;
     width: 100%;
     padding: 0 15px;
     position: fixed;
@@ -160,9 +171,12 @@ const Container = styled.div`
     );
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     z-index: 5;
+    font-family: "Lexend Deca", sans-serif;
+    color: var(--white);
+    font-size: 30px;
   }
 `;
 

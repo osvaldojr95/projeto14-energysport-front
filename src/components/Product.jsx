@@ -15,17 +15,20 @@ export default function Product() {
   const { produto, userInfo } = useUser();
   const navigate = useNavigate();
 
-  const addCart = () => {
+  const addCart = async () => {
     if (!userInfo.name) {
       navigate("/login");
     } else {
-      // const URL = "/cart";
-      // const obj = { id: produto._id };
-      // const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
+      const URL = "https://back-energysport.herokuapp.com/cart";
+      const obj = { idProd: produto._id };
+      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       try {
-        // const response = await axios.post(URL, obj, config});
+        console.log("indo");
+        await axios.post(URL, obj, config);
         navigate("/carrinho");
-      } catch (e) {}
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   };
 

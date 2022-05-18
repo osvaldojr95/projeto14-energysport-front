@@ -92,10 +92,10 @@ export default function SignUp() {
       <Logo type="true" />
       <form>
         <Input
-          type="input"
+          type="text"
           value={name}
           setValue={setName}
-          placeholder="Senha"
+          placeholder="Nome"
         />
         <Input
           type="email"
@@ -117,7 +117,7 @@ export default function SignUp() {
         />
         {showError()}
         <Button type="submit" callback={signup}>
-          Entrar
+          Cadastrar
         </Button>
       </form>
       <Cadastro>Já tem uma conta?</Cadastro>

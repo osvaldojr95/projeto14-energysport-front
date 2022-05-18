@@ -9,7 +9,7 @@ export default function DataProvider({ children }) {
   useEffect(() => {
     let _total = 0;
     cart.forEach((item) => {
-      _total += item.sale ? item.sale : item.price;
+      _total += (item.sale ? item.sale : item.price) * item.qtd;
     });
     setTotal(_total);
   }, [cart]);
@@ -19,7 +19,7 @@ export default function DataProvider({ children }) {
       value={{
         cart,
         setCart,
-        total
+        total,
       }}
     >
       {children}
